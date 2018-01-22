@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		60EF7D2FE9F4BED72B66385D /* Pods_MapPins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB32F03AF0EAD6486CB9CBB /* Pods_MapPins.framework */; };
+		B35CC3232014FBF800DD780C /* reuse_popup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35CC3222014FBF800DD780C /* reuse_popup.storyboard */; };
+		B35CC325201573E700DD780C /* ReusePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35CC324201573E700DD780C /* ReusePopup.swift */; };
+		B3711D492010579A00B703DE /* PublicArt.json in Resources */ = {isa = PBXBuildFile; fileRef = B3711D482010579900B703DE /* PublicArt.json */; };
 		B3861AD2200D92340034F09D /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3861AD1200D92340034F09D /* SignInVC.swift */; };
 		B3861AD5200D92950034F09D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3861AD4200D92950034F09D /* Constants.swift */; };
 		B3861AD8200DB02D0034F09D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3861AD7200DB02D0034F09D /* DataService.swift */; };
@@ -23,6 +26,9 @@
 /* Begin PBXFileReference section */
 		455F8138707C7340F60104CA /* Pods-MapPins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapPins.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapPins/Pods-MapPins.debug.xcconfig"; sourceTree = "<group>"; };
 		54F00FFE0D3FA419BA2BCFEE /* Pods-MapPins.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapPins.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapPins/Pods-MapPins.release.xcconfig"; sourceTree = "<group>"; };
+		B35CC3222014FBF800DD780C /* reuse_popup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = reuse_popup.storyboard; sourceTree = "<group>"; };
+		B35CC324201573E700DD780C /* ReusePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusePopup.swift; sourceTree = "<group>"; };
+		B3711D482010579900B703DE /* PublicArt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PublicArt.json; sourceTree = "<group>"; };
 		B3861AD1200D92340034F09D /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		B3861AD4200D92950034F09D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B3861AD7200DB02D0034F09D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -112,6 +118,7 @@
 			children = (
 				B386F976200A72BF009638D1 /* LaunchScreen.storyboard */,
 				B386F971200A72BF009638D1 /* Main.storyboard */,
+				B35CC3222014FBF800DD780C /* reuse_popup.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -121,7 +128,9 @@
 			children = (
 				B386F96D200A72BF009638D1 /* AppDelegate.swift */,
 				B386F96F200A72BF009638D1 /* MapVC.swift */,
+				B3711D482010579900B703DE /* PublicArt.json */,
 				B3861AD1200D92340034F09D /* SignInVC.swift */,
+				B35CC324201573E700DD780C /* ReusePopup.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -209,6 +218,8 @@
 				B386F980200A74A5009638D1 /* GoogleService-Info.plist in Resources */,
 				B386F975200A72BF009638D1 /* Assets.xcassets in Resources */,
 				B386F973200A72BF009638D1 /* Main.storyboard in Resources */,
+				B35CC3232014FBF800DD780C /* reuse_popup.storyboard in Resources */,
+				B3711D492010579A00B703DE /* PublicArt.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +309,7 @@
 				B3861AD2200D92340034F09D /* SignInVC.swift in Sources */,
 				B386F96E200A72BF009638D1 /* AppDelegate.swift in Sources */,
 				B3861AD5200D92950034F09D /* Constants.swift in Sources */,
+				B35CC325201573E700DD780C /* ReusePopup.swift in Sources */,
 				B3861AD8200DB02D0034F09D /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

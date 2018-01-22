@@ -138,6 +138,9 @@
                                                 </constraints>
                                                 <color key="tintColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="Location"/>
+                                                <connections>
+                                                    <action selector="searchBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hA4-F9-crJ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSd-ih-XYq" userLabel="DirWalk">
                                                 <rect key="frame" x="0.0" y="370" width="44" height="44"/>
@@ -187,6 +190,14 @@
                                     <constraint firstAttribute="width" constant="84" id="x2h-4i-50g"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2l-PP-tlL">
+                                <rect key="frame" x="315" y="607" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="25K-50-bGP"/>
+                                    <constraint firstAttribute="width" constant="35" id="eKQ-Ru-CUe"/>
+                                </constraints>
+                                <state key="normal" image="direction-walking"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.73333333333333328" green="0.87058823529411766" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,6 +210,8 @@
                             <constraint firstItem="FAg-mr-qvl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NUC-oC-Y9C"/>
                             <constraint firstItem="o18-2b-hTb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QuF-bg-9E2"/>
                             <constraint firstItem="FAg-mr-qvl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="RSQ-eo-j8b"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="x2l-PP-tlL" secondAttribute="bottom" constant="25" id="STN-fL-MI6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x2l-PP-tlL" secondAttribute="trailing" constant="25" id="TvS-bM-avJ"/>
                             <constraint firstItem="o18-2b-hTb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="VDh-Od-DMb"/>
                             <constraint firstItem="fOh-rL-niU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="eQN-xS-cCY"/>
                             <constraint firstItem="fOh-rL-niU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="gTV-0Z-FUk"/>
@@ -209,11 +222,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="centerMapBtn" destination="x2l-PP-tlL" id="FbE-cA-FnG"/>
                         <outlet property="dirCarButton" destination="Xd6-1V-nR4" id="VY6-DG-AJF"/>
                         <outlet property="dirWalkButton" destination="MSd-ih-XYq" id="yWQ-gd-fMA"/>
                         <outlet property="dispAnnoButton" destination="Zac-Z4-MiK" id="h11-p7-5qC"/>
                         <outlet property="hideMenuButton" destination="ySm-L6-3Lf" id="sc3-k8-MnT"/>
                         <outlet property="homeButton" destination="CL5-pm-2yv" id="lgd-3Q-C3d"/>
+                        <outlet property="mapView" destination="o18-2b-hTb" id="1pg-cT-PkV"/>
                         <outlet property="menuCurve" destination="5iP-Gu-mHj" id="Zg3-iD-w4G"/>
                         <outlet property="menuView" destination="FAg-mr-qvl" id="fja-fi-qoA"/>
                         <outlet property="profileImg" destination="kao-W2-2Rw" id="xW8-EH-OIK"/>

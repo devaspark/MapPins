@@ -10,8 +10,9 @@
 import UIKit
 import MapKit
 import SwiftyJSON
+import CoreLocation
 
-class MapVC: UIViewController {
+class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var screenCoverButton: UIButton!
     @IBOutlet weak var menuView: UIView!
@@ -25,15 +26,119 @@ class MapVC: UIViewController {
     @IBOutlet weak var dirWalkButton: UIButton!
     @IBOutlet weak var dirCarButton: UIButton!
     @IBOutlet weak var hideMenuButton: UIButton!
+    @IBOutlet weak var centerMapBtn: UIButton!
     
+    @IBOutlet weak var mapView: MKMapView!
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        mapView.delegate = self
+        locationManager.delegate = self
+        
+        
         //menuCurve.image = #imageLiteral(resourceName: "MenuCurve")
     
         hideMenu()
+        
+        mapView.userTrackingMode = MKUserTrackingMode.follow
+        addMapTrackingButton()
+        let initialLocation = CLLocation(latitude: 37.336745, longitude: -122.040200)
+        let mapLoc = MapLocation(title: "Taiwan Porridge Kingdom",
+                              locationName: "Cupertino Square",
+                              locationType: "Porridge",
+                              coordinate: CLLocationCoordinate2D(latitude: initialLocation.coordinate.latitude, longitude: initialLocation.coordinate.longitude))
+        mapView.addAnnotation(mapLoc)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        enableBasicLocationServices()
+    }
+    
+    func enableBasicLocationServices() {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.requestWhenInUseAuthorization()
+            break
+            
+        case .restricted, .denied:
+            // Disable location features
+            
+            break
+            
+        case .authorizedWhenInUse, .authorizedAlways:
+            // Enable location features
+            mapView.showsUserLocation = true
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        /*if status == CLAuthorizationStatus.authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        }*/
+        
+        switch status {
+        case .restricted, .denied:
+            
+            break
+            
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            break
+            
+        case .notDetermined, .authorizedAlways:
+            break
+        }
+    }
+    
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
+        
+        mapView.setRegion(coordinateRegion, animated: true)
+        
+    }
+    
+    func addMapTrackingButton(){
+        centerMapBtn.backgroundColor = .clear
+        centerMapBtn.addTarget(self, action: #selector(MapVC.centerMapOnUserButtonClicked), for:.touchUpInside)
+
+    }
+    
+    @objc func centerMapOnUserButtonClicked() {
+        mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
+        //if let loc = userLocation.location {
+                //centerMapOnLocation(location: loc)
+        //}
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? MapLocation else { return nil }
+        // 3
+        let identifier = "marker"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        return view
     }
 
     @IBAction func menuBtnPressed(_ sender: Any) {
@@ -47,6 +152,20 @@ class MapVC: UIViewController {
     @IBAction func screenCoverTapped(_ sender: UIButton) {
         hideMenu()
     }
+    
+    @IBAction func searchBtnPressed(_ sender: UIButton) {
+        let sb = UIStoryboard(name: "reuse_popup", bundle: nil)
+        let popup = sb.instantiateInitialViewController()! as! ReusePopup
+        popup.delegate = self
+        self.present(popup, animated: true)
+        
+        
+    }
+    
+
+}
+
+extension MapVC {
     
     func showMenu() {
         menuView.isHidden = false
@@ -77,7 +196,7 @@ class MapVC: UIViewController {
             self.profileImg.transform = .identity
             self.hideMenuButton.transform = .identity
         })
-    
+        
     }
     
     func hideMenu() {
@@ -111,6 +230,40 @@ class MapVC: UIViewController {
             self.menuView.isHidden = true
         }
     }
-
 }
+
+extension MapVC: LocationService {
+    func InputLocation(input: String) -> CLLocationCoordinate2D {
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(input) { (placemarks, error) in
+            guard let placemarks = placemarks, let locationCoord = placemarks.first?.location
+                else {
+                    return
+            }
+            self.centerMapOnLocation(location: locationCoord)
+            
+            
+            let tempLoc = MapLocation(title: "Default Title",
+             locationName: "Default Name",
+             locationType: "Default Type",
+             coordinate: CLLocationCoordinate2D(latitude: locationCoord.coordinate.latitude, longitude: locationCoord.coordinate.longitude))
+            
+            DataService.ds.createFirebaseLocationData(title: tempLoc.title!, name: tempLoc.locationName, type: tempLoc.locationType, location: tempLoc.coordinate)
+             self.mapView.addAnnotation(tempLoc)
+            
+            
+            
+        }
+        
+    
+        return CLLocationCoordinate2D()
+        
+        
+    }
+    
+    
+}
+
+
 
