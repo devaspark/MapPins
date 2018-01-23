@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 protocol LocationService {
-    func InputLocation(input: String) -> CLLocationCoordinate2D
+    func InputLocation(locationInput: String, nameInput: String) -> CLLocationCoordinate2D
     func hideMenu()
     func showMenu()
 }

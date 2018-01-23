@@ -233,10 +233,10 @@ extension MapVC {
 }
 
 extension MapVC: LocationService {
-    func InputLocation(input: String) -> CLLocationCoordinate2D {
+    func InputLocation(locationInput: String, nameInput: String) -> CLLocationCoordinate2D {
         
         let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(input) { (placemarks, error) in
+        geoCoder.geocodeAddressString(locationInput) { (placemarks, error) in
             guard let placemarks = placemarks, let locationCoord = placemarks.first?.location
                 else {
                     return
@@ -244,9 +244,9 @@ extension MapVC: LocationService {
             self.centerMapOnLocation(location: locationCoord)
             
             
-            let tempLoc = MapLocation(title: "Default Title",
-             locationName: "Default Name",
-             locationType: "Default Type",
+            let tempLoc = MapLocation(title: nameInput,
+             locationName: nameInput,
+             locationType: "Food",
              coordinate: CLLocationCoordinate2D(latitude: locationCoord.coordinate.latitude, longitude: locationCoord.coordinate.longitude))
             
             DataService.ds.createFirebaseLocationData(title: tempLoc.title!, name: tempLoc.locationName, type: tempLoc.locationType, location: tempLoc.coordinate)

@@ -12,6 +12,7 @@ import CoreLocation
 class ReusePopup: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locTextField: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
     
@@ -25,11 +26,16 @@ class ReusePopup: UIViewController {
 
     @IBAction func submitBtnPress(_ sender: UIButton) {
         
-        guard let text = locTextField.text, !(locTextField.text?.isEmpty)!, !(locTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty)! else {
+        guard let textName = nameTextField.text, !(nameTextField.text?.isEmpty)!, !(nameTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty)! else {
             return
         }
         
-        _ = delegate?.InputLocation(input: text)
+        
+        guard let textLoc = locTextField.text, !(locTextField.text?.isEmpty)!, !(locTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty)! else {
+            return
+        }
+        
+        _ = delegate?.InputLocation(locationInput: textLoc, nameInput: textName)
         dismiss(animated: true) {
             self.delegate!.hideMenu()
         }

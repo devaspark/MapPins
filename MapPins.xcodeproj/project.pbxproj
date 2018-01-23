@@ -11,6 +11,7 @@
 		B35CC3232014FBF800DD780C /* reuse_popup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35CC3222014FBF800DD780C /* reuse_popup.storyboard */; };
 		B35CC325201573E700DD780C /* ReusePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35CC324201573E700DD780C /* ReusePopup.swift */; };
 		B3711D492010579A00B703DE /* PublicArt.json in Resources */ = {isa = PBXBuildFile; fileRef = B3711D482010579900B703DE /* PublicArt.json */; };
+		B381A4A8201717DB00A4B0A9 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381A4A7201717DB00A4B0A9 /* DesignableView.swift */; };
 		B3861AD2200D92340034F09D /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3861AD1200D92340034F09D /* SignInVC.swift */; };
 		B3861AD5200D92950034F09D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3861AD4200D92950034F09D /* Constants.swift */; };
 		B3861AD8200DB02D0034F09D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3861AD7200DB02D0034F09D /* DataService.swift */; };
@@ -29,6 +30,7 @@
 		B35CC3222014FBF800DD780C /* reuse_popup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = reuse_popup.storyboard; sourceTree = "<group>"; };
 		B35CC324201573E700DD780C /* ReusePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusePopup.swift; sourceTree = "<group>"; };
 		B3711D482010579900B703DE /* PublicArt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PublicArt.json; sourceTree = "<group>"; };
+		B381A4A7201717DB00A4B0A9 /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		B3861AD1200D92340034F09D /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		B3861AD4200D92950034F09D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B3861AD7200DB02D0034F09D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B381A4A62017179500A4B0A9 /* IBDesignables */ = {
+			isa = PBXGroup;
+			children = (
+				B381A4A7201717DB00A4B0A9 /* DesignableView.swift */,
+			);
+			path = IBDesignables;
+			sourceTree = "<group>";
+		};
 		B3861AD3200D92710034F09D /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +103,7 @@
 		B386F96C200A72BF009638D1 /* MapPins */ = {
 			isa = PBXGroup;
 			children = (
+				B381A4A62017179500A4B0A9 /* IBDesignables */,
 				B3861AD6200DB0110034F09D /* Services */,
 				B3861AD3200D92710034F09D /* Util */,
 				B386F9A8200A8E79009638D1 /* Controller */,
@@ -304,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B381A4A8201717DB00A4B0A9 /* DesignableView.swift in Sources */,
 				B386F970200A72BF009638D1 /* MapVC.swift in Sources */,
 				B3DAC137200DE24500309A17 /* MapLocation.swift in Sources */,
 				B3861AD2200D92340034F09D /* SignInVC.swift in Sources */,
