@@ -25,8 +25,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ju5-df-twE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nHX-21-76o">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dN-Dv-rTT" customClass="DesignableView" customModule="MapPins" customModuleProvider="target">
-                                <rect key="frame" x="77.5" y="208" width="300" height="250"/>
+                                <rect key="frame" x="37.5" y="208" width="300" height="250"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="djx-HL-hRr">
                                         <rect key="frame" x="20" y="53" width="260" height="186"/>
@@ -64,6 +72,9 @@
                                                         <state key="normal" title="Cancel">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="cancelBtnPress:" destination="ClY-YQ-PSe" eventType="touchUpInside" id="adN-Pr-QLw"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MxT-ed-Vsx">
                                                         <rect key="frame" x="0.0" y="43" width="246" height="30"/>
@@ -114,12 +125,12 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obt-q5-9qT" customClass="DesignableView" customModule="MapPins" customModuleProvider="target">
-                                <rect key="frame" x="177" y="158" width="100" height="100"/>
+                                <rect key="frame" x="137" y="158" width="100" height="100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thh-xq-844" customClass="DesignableView" customModule="MapPins" customModuleProvider="target">
                                         <rect key="frame" x="5" y="5" width="90" height="90"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_icon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cge-Yr-2OS">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cge-Yr-2OS">
                                                 <rect key="frame" x="10" y="10" width="70" height="70"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -129,6 +140,7 @@
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Cge-Yr-2OS" firstAttribute="centerY" secondItem="thh-xq-844" secondAttribute="centerY" id="4Ou-u5-GSW"/>
                                             <constraint firstAttribute="height" constant="90" id="KIc-uT-vGt"/>
@@ -158,14 +170,19 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9dN-Dv-rTT" firstAttribute="centerX" secondItem="f5A-yq-G55" secondAttribute="centerX" constant="40" id="AKA-vf-yre"/>
+                            <constraint firstItem="Ju5-df-twE" firstAttribute="leading" secondItem="fbL-Ps-ds4" secondAttribute="leading" id="8Mk-Vm-4zy"/>
+                            <constraint firstItem="9dN-Dv-rTT" firstAttribute="centerX" secondItem="f5A-yq-G55" secondAttribute="centerX" id="AKA-vf-yre"/>
                             <constraint firstItem="Obt-q5-9qT" firstAttribute="centerX" secondItem="9dN-Dv-rTT" secondAttribute="centerX" id="EfF-JM-fCH"/>
+                            <constraint firstItem="Ju5-df-twE" firstAttribute="bottom" secondItem="fbL-Ps-ds4" secondAttribute="bottom" id="RD5-AQ-DcF"/>
+                            <constraint firstItem="Ju5-df-twE" firstAttribute="trailing" secondItem="fbL-Ps-ds4" secondAttribute="trailing" id="SgI-D5-ey0"/>
+                            <constraint firstItem="Ju5-df-twE" firstAttribute="top" secondItem="f5A-yq-G55" secondAttribute="top" id="Tpc-GL-Pem"/>
                             <constraint firstItem="9dN-Dv-rTT" firstAttribute="centerY" secondItem="f5A-yq-G55" secondAttribute="centerY" id="UgT-Yw-eJ1"/>
                             <constraint firstItem="9dN-Dv-rTT" firstAttribute="top" secondItem="Obt-q5-9qT" secondAttribute="bottom" constant="-50" id="irL-GF-QLj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fbL-Ps-ds4"/>
                     </view>
                     <connections>
+                        <outlet property="iconImage" destination="Cge-Yr-2OS" id="mjz-BN-Co4"/>
                         <outlet property="locTextField" destination="ZOo-Fb-Oo3" id="DA5-8t-xOv"/>
                         <outlet property="nameTextField" destination="1Pr-gJ-HFi" id="GpU-mg-JY2"/>
                         <outlet property="submitBtn" destination="MxT-ed-Vsx" id="OHi-6Y-8iH"/>
@@ -177,7 +194,4 @@
             <point key="canvasLocation" x="40.799999999999997" y="134.48275862068968"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="location_icon" width="700" height="700"/>
-    </resources>
 </document>

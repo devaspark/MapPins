@@ -15,15 +15,26 @@ class ReusePopup: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locTextField: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var iconImage: UIImageView!
     
     var delegate: LocationService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let origImage = UIImage(named: "location_icon2")
+        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        
+        iconImage.image = tintedImage
+        iconImage.tintColor = .white
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func cancelBtnPress(_ sender: UIButton) {
+        dismiss(animated: true) {
+            self.delegate!.hideMenu()
+        }
+    }
+    
     @IBAction func submitBtnPress(_ sender: UIButton) {
         
         guard let textName = nameTextField.text, !(nameTextField.text?.isEmpty)!, !(nameTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty)! else {

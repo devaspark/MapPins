@@ -21,8 +21,7 @@ class DataService {
     private var _REF_BASE = DB_BASE
     private var _REF_LOCATIONS = DB_BASE.child("location")
     private var _REF_USERS = DB_BASE.child("users")
- 
-    
+    private var _REF_USERLOC: DatabaseReference?
     
     var REF_BASE: DatabaseReference {
         return _REF_BASE
@@ -34,6 +33,13 @@ class DataService {
     
     var REF_USERS: DatabaseReference {
         return _REF_USERS
+    }
+    
+    var REF_USERLOC: DatabaseReference {
+        get {
+            _REF_USERLOC = _REF_LOCATIONS.child(Auth.auth().currentUser!.uid)
+            return _REF_USERLOC!
+        }
     }
     
     func createFirebaseDBUser(uid: String, userData: Dictionary<String, String>) {

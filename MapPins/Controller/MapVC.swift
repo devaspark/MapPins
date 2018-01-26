@@ -11,6 +11,7 @@ import UIKit
 import MapKit
 import SwiftyJSON
 import CoreLocation
+import Firebase
 
 class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
@@ -30,6 +31,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
+    var mapLocs = [MapLocation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +47,15 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         mapView.userTrackingMode = MKUserTrackingMode.follow
         addMapTrackingButton()
-        let initialLocation = CLLocation(latitude: 37.336745, longitude: -122.040200)
+        
+        loadingAnnotations()
+        
+       /* let initialLocation = CLLocation(latitude: 37.336745, longitude: -122.040200)
         let mapLoc = MapLocation(title: "Taiwan Porridge Kingdom",
                               locationName: "Cupertino Square",
                               locationType: "Porridge",
                               coordinate: CLLocationCoordinate2D(latitude: initialLocation.coordinate.latitude, longitude: initialLocation.coordinate.longitude))
-        mapView.addAnnotation(mapLoc)
+        mapView.addAnnotation(mapLoc) */
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -158,8 +163,6 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         let popup = sb.instantiateInitialViewController()! as! ReusePopup
         popup.delegate = self
         self.present(popup, animated: true)
-        
-        
     }
     
 
@@ -243,7 +246,7 @@ extension MapVC: LocationService {
             }
             self.centerMapOnLocation(location: locationCoord)
             
-            
+            print("This is locationCoord: \(locationCoord.coordinate.latitude), \(locationCoord.coordinate.longitude)")
             let tempLoc = MapLocation(title: nameInput,
              locationName: nameInput,
              locationType: "Food",
@@ -259,6 +262,42 @@ extension MapVC: LocationService {
     
         return CLLocationCoordinate2D()
         
+        
+    }
+    
+    func loadingAnnotations() {
+        DataService.ds.REF_USERLOC.observe(.value, with: { (snapshot) in
+            self.mapLocs = []
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                
+                for snap in snapshot {
+                    
+                    if let postDict = snap.value as? Dictionary<String, Any> {
+                        
+                        let keyTemp = snap.key
+                        print(keyTemp)
+                        
+                        if let latTemp = postDict["latitude"] as? CLLocationDegrees {
+                            print("I hit lat")
+                            if let longTemp = postDict["longitude"] as? CLLocationDegrees {
+                                print("I hit long")
+                                if let typeTemp = postDict["type"] as? String {
+                                    print("I hit type")
+                                    let tempLoc = CLLocationCoordinate2D(latitude: latTemp, longitude: longTemp)
+                                    
+                                    let tempMap = MapLocation(title: keyTemp, locationName: keyTemp, locationType: typeTemp, coordinate: tempLoc)
+                                    
+                                    print("This is the map: \(String(describing: tempMap.title)), \(tempMap.locationName), \(tempMap.locationType), \(tempMap.coordinate.latitude), \(tempMap.coordinate.longitude)")
+                                    self.mapView.addAnnotation(tempMap)
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        })
         
     }
     
