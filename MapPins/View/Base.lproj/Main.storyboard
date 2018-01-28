@@ -120,8 +120,11 @@
                                                 </constraints>
                                                 <color key="tintColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="Location"/>
+                                                <connections>
+                                                    <action selector="displayAnnotations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gUJ-A9-sm5"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLC-hM-XM1" userLabel="Rmv Anno">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLC-hM-XM1" userLabel="Hide Anno">
                                                 <rect key="frame" x="0.0" y="222" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="Kvx-Sd-Ixk"/>
@@ -129,6 +132,9 @@
                                                 </constraints>
                                                 <color key="tintColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="Location"/>
+                                                <connections>
+                                                    <action selector="hideAnnotations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OSA-CR-H3f"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dew-Fd-v7Z" userLabel="Search">
                                                 <rect key="frame" x="0.0" y="296" width="44" height="44"/>
@@ -226,13 +232,13 @@
                         <outlet property="dirCarButton" destination="Xd6-1V-nR4" id="VY6-DG-AJF"/>
                         <outlet property="dirWalkButton" destination="MSd-ih-XYq" id="yWQ-gd-fMA"/>
                         <outlet property="dispAnnoButton" destination="Zac-Z4-MiK" id="h11-p7-5qC"/>
+                        <outlet property="hideAnnoButton" destination="iLC-hM-XM1" id="Uwk-uV-dx8"/>
                         <outlet property="hideMenuButton" destination="ySm-L6-3Lf" id="sc3-k8-MnT"/>
                         <outlet property="homeButton" destination="CL5-pm-2yv" id="lgd-3Q-C3d"/>
                         <outlet property="mapView" destination="o18-2b-hTb" id="1pg-cT-PkV"/>
                         <outlet property="menuCurve" destination="5iP-Gu-mHj" id="Zg3-iD-w4G"/>
                         <outlet property="menuView" destination="FAg-mr-qvl" id="fja-fi-qoA"/>
                         <outlet property="profileImg" destination="kao-W2-2Rw" id="xW8-EH-OIK"/>
-                        <outlet property="rmvAnnoButton" destination="iLC-hM-XM1" id="gTu-ow-bUI"/>
                         <outlet property="screenCoverButton" destination="fOh-rL-niU" id="cST-26-k4n"/>
                         <outlet property="searchButton" destination="dew-Fd-v7Z" id="F1K-oG-WwD"/>
                     </connections>

@@ -22,7 +22,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var dispAnnoButton: UIButton!
-    @IBOutlet weak var rmvAnnoButton: UIButton!
+    @IBOutlet weak var hideAnnoButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var dirWalkButton: UIButton!
     @IBOutlet weak var dirCarButton: UIButton!
@@ -50,12 +50,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         loadingAnnotations()
         
-       /* let initialLocation = CLLocation(latitude: 37.336745, longitude: -122.040200)
-        let mapLoc = MapLocation(title: "Taiwan Porridge Kingdom",
-                              locationName: "Cupertino Square",
-                              locationType: "Porridge",
-                              coordinate: CLLocationCoordinate2D(latitude: initialLocation.coordinate.latitude, longitude: initialLocation.coordinate.longitude))
-        mapView.addAnnotation(mapLoc) */
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -165,7 +160,24 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         self.present(popup, animated: true)
     }
     
-
+    @IBAction func displayAnnotations(_ sender: UIButton) {
+        for _annotations in mapView.annotations{
+            self.mapView.view(for: _annotations)?.isHidden = false
+        }
+        //self.loadingAnnotations()
+        hideMenu()
+    }
+    
+    @IBAction func hideAnnotations(_ sender: UIButton) {
+        //print(mapLocs.count)
+        for _annotations in mapView.annotations{
+            self.mapView.view(for: _annotations)?.isHidden = true
+        }
+        //mapView.removeAnnotations(mapView.annotations)
+        hideMenu()
+    }
+    
+    
 }
 
 extension MapVC {
@@ -181,7 +193,7 @@ extension MapVC {
             self.menuCurve.transform = .identity
         })
         UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut, .allowUserInteraction], animations: {
-            self.rmvAnnoButton.transform = .identity
+            self.hideAnnoButton.transform = .identity
             self.searchButton.transform = .identity
         })
         
@@ -227,7 +239,7 @@ extension MapVC {
         })
         
         UIView.animate(withDuration: 0.4, delay: 0.21, options: [.curveEaseOut, .allowUserInteraction], animations: {
-            self.rmvAnnoButton.transform = CGAffineTransform(translationX: -self.menuView.frame.width, y: 0)
+            self.hideAnnoButton.transform = CGAffineTransform(translationX: -self.menuView.frame.width, y: 0)
             self.searchButton.transform = CGAffineTransform(translationX: -self.menuView.frame.width, y: 0)
         }) { success in
             self.menuView.isHidden = true
@@ -253,21 +265,26 @@ extension MapVC: LocationService {
              coordinate: CLLocationCoordinate2D(latitude: locationCoord.coordinate.latitude, longitude: locationCoord.coordinate.longitude))
             
             DataService.ds.createFirebaseLocationData(title: tempLoc.title!, name: tempLoc.locationName, type: tempLoc.locationType, location: tempLoc.coordinate)
-             self.mapView.addAnnotation(tempLoc)
+            self.mapLocs.append(tempLoc)
             
-            
+            self.mapView.addAnnotation(tempLoc)
             
         }
         
-    
-        return CLLocationCoordinate2D()
+        if let addyResults = mapLocs.last?.coordinate {
+            return addyResults
+        } else {
+            return CLLocationCoordinate2D()
+        }
         
         
     }
     
     func loadingAnnotations() {
+        mapView.removeAnnotations(mapView.annotations)
         DataService.ds.REF_USERLOC.observe(.value, with: { (snapshot) in
             self.mapLocs = []
+            
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
                 for snap in snapshot {
@@ -288,6 +305,7 @@ extension MapVC: LocationService {
                                     let tempMap = MapLocation(title: keyTemp, locationName: keyTemp, locationType: typeTemp, coordinate: tempLoc)
                                     
                                     print("This is the map: \(String(describing: tempMap.title)), \(tempMap.locationName), \(tempMap.locationType), \(tempMap.coordinate.latitude), \(tempMap.coordinate.longitude)")
+                                    self.mapLocs.append(tempMap)
                                     self.mapView.addAnnotation(tempMap)
                                     
                                 }
