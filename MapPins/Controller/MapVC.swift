@@ -140,7 +140,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         }
         return view
     }
-
+    
     @IBAction func menuBtnPressed(_ sender: Any) {
         showMenu()
     }
@@ -249,6 +249,7 @@ extension MapVC {
 
 extension MapVC: LocationService {
     func InputLocation(locationInput: String, nameInput: String) -> CLLocationCoordinate2D {
+        
         
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(locationInput) { (placemarks, error) in

@@ -16,22 +16,62 @@ protocol LocationService {
 }
 
 class MapLocation: NSObject, MKAnnotation {
+
+    private var _title: String?
+    private var _locationType: String
+    private var _locationName: String
+    private var _coordinate: CLLocationCoordinate2D
     
-    let title: String?
-    let locationName: String
-    let locationType: String
-    let coordinate: CLLocationCoordinate2D
+    
     
     init(title: String, locationName: String, locationType: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.locationName = locationName
-        self.locationType = locationType
-        self.coordinate = coordinate
+        self._title = title
+        self._locationName = locationName
+        self._locationType = locationType
+        self._coordinate = coordinate
         
         super.init()
     }
     
     var subtitle: String? {
-        return locationName
+        return _locationName
     }
+    
+    var title: String? {
+        get {
+            return _title
+        }
+        set {
+            _title = newValue
+        }
+    }
+    
+    var locationType: String {
+        get {
+            return _locationType
+        }
+        set {
+            _locationType = newValue
+        }
+    }
+    
+    var locationName: String {
+        get {
+            return _locationName
+        }
+        set {
+            _locationName = newValue
+        }
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        get {
+            return _coordinate
+        }
+        set {
+            _coordinate = newValue
+        }
+    }
+    
+    
 }
